@@ -1,6 +1,4 @@
-Here's a polished, exciting, and professional GitHub description for your **MERN Stack AI Chatbot** project:
 
----
 
 ## 🚀 MERN Stack AI Chatbot (ChatGPT-Inspired)
 
@@ -44,6 +42,4 @@ Pull requests and feature ideas are welcome! Feel free to fork the repo, open is
 * 🌐 Multilingual support
 * 🧩 Plugin system for custom AI behaviors
 
----
 
-Would you like a `README.md` file generated with badges, installation steps, and screenshots too?

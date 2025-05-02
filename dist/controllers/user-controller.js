@@ -21,6 +21,19 @@ export const userSignup = async (req, res, next) => {
         const hashedPassword = await hash(password, 10);
         const user = new User({ name, email, password: hashedPassword });
         await user.save();
+        //create token and set cookie
+        res.clearCookie(COOKIE_NAME, { path: "/", domain: DOMAIN,
+            secure: false,
+            httpOnly: true,
+            signed: true, //change in production
+            expires: new Date(0)
+        });
+        const token = createToken(user._id.toString(), user.email, "7d");
+        res.cookie(COOKIE_NAME, token, { path: "/", domain: DOMAIN,
+            secure: false,
+            httpOnly: true,
+            signed: true,
+            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) });
         return res.status(201).json({ message: "ok", id: user._id.toString });
     }
     catch (error) {
@@ -39,6 +52,7 @@ export const userLogin = async (req, res, next) => {
         if (!isMatch) {
             return res.status(401).json("Invalid Password");
         }
+        //create token and set cookie
         res.clearCookie(COOKIE_NAME, { path: "/", domain: DOMAIN,
             secure: false,
             httpOnly: true,
@@ -51,6 +65,7 @@ export const userLogin = async (req, res, next) => {
             httpOnly: true,
             signed: true,
             expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) });
+        //return success response
         return res.status(200).json({
             message: "User Found",
             user: {

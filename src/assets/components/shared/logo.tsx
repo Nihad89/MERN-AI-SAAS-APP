@@ -22,9 +22,9 @@ export const Logo = () => {
         className="image-inverted" 
         />
         <Typography sx={{display : {md:"block",sm : "none ", xs : "none"},mr : "auto",fontWeight : "800", textShadow : "2px 2px 20px #000"}}>
-            <span style={{color : "#000"}}>MERN</span>GPT
+            
         </Typography>
-        MyApp
+        <span style={{color: "lightgrey", textDecoration: "none"}}>MERN-GPT</span>
       </Link>
 
     </div>

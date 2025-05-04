@@ -6,11 +6,12 @@ import { NotFound } from './assets/pages/NotFound';
 import { Signup } from './assets/pages/Signup';
 import { Chat } from './assets/pages/Chat';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { useAuth } from './context/AuthContext';
 
 
 function App() {
   
-
+  
   return (
   <main>
     <Header/>

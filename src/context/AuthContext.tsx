@@ -1,0 +1,60 @@
+import {createContext, useEffect, useState , ReactNode , useContext} from 'react';
+
+type User = {
+    name : string
+    email : string
+}
+type UserAuth = {
+    isLoggedIn: boolean;
+    user : User | null;
+    login : (email :  string, password : string) => Promise<void>;
+    signup : (name : string , email :  string, password : string) => Promise<void>;
+    logout : () => Promise<void>;
+}
+
+
+const AuthContext = createContext<UserAuth | null>(null);
+export const AuthProvider = ({children} :  {children : ReactNode}) => {
+
+    const[user , setUser] = useState<User | null>(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            setIsLoggedIn(true);
+            // Fetch user data from the server using the token
+           // fetchUserData(token);
+        }
+    }, []);    
+
+    // Example usage of state variables to avoid unused variable errors
+    
+    const login = async (email: string, password: string) => {
+        setUser({ name: "Example User", email });
+        setIsLoggedIn(true);
+    };
+
+    const signup = async (name: string, email: string, password: string) => {
+        setUser({ name, email });
+        setIsLoggedIn(true);
+    };
+
+    const logout = async () => {
+        setUser(null);
+        setIsLoggedIn(false);
+    };
+
+    const value = {
+        isLoggedIn,
+        user,
+        login,
+        signup,
+        logout,
+    };
+    return <AuthContext.Provider value={value}>
+        {children}  
+        </AuthContext.Provider>;
+};
+
+export const useAuth = () => useContext(AuthContext) ;

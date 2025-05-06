@@ -34,7 +34,9 @@ export const userSignup = async (req, res, next) => {
             httpOnly: true,
             signed: true,
             expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) });
-        return res.status(201).json({ message: "ok", id: user._id.toString });
+        return res.status(201).json({ message: "ok",
+            name: user.name,
+            email: user.email, });
     }
     catch (error) {
         console.log(error);
@@ -67,10 +69,9 @@ export const userLogin = async (req, res, next) => {
             expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) });
         //return success response
         return res.status(200).json({
-            message: "User Found",
-            user: {
-                name: user.name
-            }
+            message: "Ok",
+            name: user.name,
+            email: user.email,
         });
     }
     catch (error) {

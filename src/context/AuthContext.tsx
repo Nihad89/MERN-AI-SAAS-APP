@@ -1,4 +1,5 @@
 import {createContext, useEffect, useState , ReactNode , useContext} from 'react';
+import { loginUser } from '../helpers/api-communicator'; 
 
 type User = {
     name : string
@@ -31,8 +32,13 @@ export const AuthProvider = ({children} :  {children : ReactNode}) => {
     // Example usage of state variables to avoid unused variable errors
     
     const login = async (email: string, password: string) => {
-        setUser({ name: "Example User", email });
-        setIsLoggedIn(true);
+        const data = await loginUser(email, password);
+        if (data) {
+            setUser({ name: data.name, email : data.email });
+            setIsLoggedIn(true);
+        }
+        
+        
     };
 
     const signup = async (name: string, email: string, password: string) => {

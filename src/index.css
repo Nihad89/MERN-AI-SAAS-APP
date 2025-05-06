@@ -27,3 +27,7 @@ body{
 
 
 }
+
+.MuiFormControl.Mui-focused .MuiOutlinedInput-notchedOutline{
+  border-color: #fffafa !important; 
+}
